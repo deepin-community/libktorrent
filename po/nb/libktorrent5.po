@@ -1,0 +1,579 @@
+# Translation of libktorrent5 to Norwegian Bokmål
+#
+# Bjørn Steensrud <bjornst@skogkatt.homelinux.org>, 2010, 2011, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-06-26 00:17+0000\n"
+"PO-Revision-Date: 2013-09-18 13:04+0200\n"
+"Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
+"Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
+"Language: nb\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 1.5\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#: src/bcodec/bdecoder.cpp:62
+#, kde-format
+msgid "Illegal token: %1"
+msgstr "Ugyldig tegn: %1"
+
+#: src/bcodec/bdecoder.cpp:115 src/bcodec/bdecoder.cpp:123
+#, kde-format
+msgid "Decode error"
+msgstr "Dekodingsfeil"
+
+#: src/bcodec/bdecoder.cpp:175 src/bcodec/bdecoder.cpp:213
+#, kde-format
+msgid "Unexpected end of input"
+msgstr "Uventet slutt på inndata"
+
+#: src/bcodec/bdecoder.cpp:192 src/bcodec/bdecoder.cpp:232
+#, kde-format
+msgid "Cannot convert %1 to an int"
+msgstr "Klarte ikke konvertere %1 til et heltall"
+
+#: src/bcodec/bdecoder.cpp:237
+#, kde-format
+msgid "Torrent is incomplete."
+msgstr "Torrenten er ufullstendig."
+
+#: src/datachecker/datacheckerjob.cpp:80
+#, kde-format
+msgid "Waiting for other data checks to finish"
+msgstr "Venter på at andre datakontroller skal bli ferdig"
+
+#: src/datachecker/datacheckerjob.cpp:86 src/torrent/torrentstats.cpp:106
+#, kde-format
+msgid "Checking data"
+msgstr "Kontrollerer data"
+
+#: src/datachecker/datacheckerjob.cpp:133
+#, kde-format
+msgid "Checking Data"
+msgstr "Kontrollerer data"
+
+#: src/datachecker/multidatachecker.cpp:195
+#: src/datachecker/singledatachecker.cpp:48 src/diskio/multifilecache.cpp:635
+#: src/diskio/multifilecache.cpp:670 src/torrent/torrentcreator.cpp:125
+#: src/torrent/torrentcreator.cpp:246 src/torrent/torrentcreator.cpp:278
+#, kde-format
+msgid "Cannot open file %1: %2"
+msgstr "Kan ikke åpne fila «%1»: %2"
+
+#: src/diskio/cache.cpp:162 src/diskio/multifilecache.cpp:109
+#: src/diskio/singlefilecache.cpp:81
+#, kde-format
+msgid "Failed to create %1: %2"
+msgstr "Klarte ikke opprette %1: %2"
+
+#: src/diskio/cachefile.cpp:90 src/util/fileops.cpp:326
+#: src/util/fileops.cpp:368
+#, kde-format
+msgid "Cannot open %1: %2"
+msgstr "Kan ikke åpne %1: %2"
+
+#: src/diskio/cachefile.cpp:117 src/diskio/cachefile.cpp:229
+#: src/diskio/cachefile.cpp:382 src/diskio/cachefile.cpp:441
+#, kde-format
+msgid "Cannot open %1 for writing: readonly filesystem"
+msgstr "Kan ikke åpne %1 med skrivetilgang: filsystemet er skrivebeskyttet"
+
+#: src/diskio/cachefile.cpp:123 src/diskio/cachefile.cpp:387
+#, kde-format
+msgid "Attempting to write beyond the maximum size of %1"
+msgstr "Forsøker å skrive ut over maksimal størrelse på %1"
+
+#: src/diskio/cachefile.cpp:234
+#, kde-format
+msgid ""
+"Cannot expand file %1: attempting to grow the file beyond the maximum size"
+msgstr "Kan ikke utvide fila %1: forsøker å øke filstørrelsen ut over maksimum"
+
+#: src/diskio/cachefile.cpp:238
+#, kde-format
+msgid "Cannot expand file %1: %2"
+msgstr "Klarte ikke utvide fila %1: %2"
+
+#: src/diskio/cachefile.cpp:350
+#, kde-format
+msgid "Error: Reading past the end of the file %1"
+msgstr "Feil: Leser forbi slutten av fila %1"
+
+#: src/diskio/cachefile.cpp:355 src/diskio/cachefile.cpp:397
+#, kde-format
+msgid "Failed to seek file %1: %2"
+msgstr "Klarte ikke søke i fila %1: %2"
+
+#: src/diskio/cachefile.cpp:362
+#, kde-format
+msgid "Error reading from %1"
+msgstr "Feil ved lesing fra %1"
+
+#: src/diskio/cachefile.cpp:400
+#, kde-format
+msgid "Failed to write to file %1: %2"
+msgstr "Klarte ikke skrive til fila %1:  %2"
+
+#: src/diskio/cachefile.cpp:457
+#, kde-format
+msgid "Cannot preallocate diskspace: %1"
+msgstr "Klarte ikke tildele diskplass på forhånd: %1"
+
+#: src/diskio/chunkmanager.cpp:858 src/diskio/chunkmanager.cpp:881
+#, kde-format
+msgid "Cannot open index file %1: %2"
+msgstr "Klarte ikke åpne indeksfila %1:  %2"
+
+#: src/diskio/dndfile.cpp:86
+#, kde-format
+msgid "Cannot create file %1: %2"
+msgstr "Klarte ikke opprette fila %1:  %2"
+
+#: src/diskio/dndfile.cpp:128
+#, kde-format
+msgid "Failed to write first chunk to DND file: %1"
+msgstr "Klarte ikke skrive første blokk til DND-fil: %1"
+
+#: src/diskio/dndfile.cpp:143
+#, kde-format
+msgid "Failed to write last chunk to DND file: %1"
+msgstr "Klarte ikke skrive siste blokk til DND-fil: %1"
+
+#: src/diskio/movedatafilesjob.cpp:123
+#, kde-format
+msgid "Waiting for other move jobs to finish"
+msgstr "Venter på at andre flyttejobber skal bli ferdige"
+
+#: src/diskio/movedatafilesjob.cpp:124 src/diskio/movedatafilesjob.cpp:160
+#, kde-format
+msgctxt "The source of a file operation"
+msgid "Source"
+msgstr "Kilde"
+
+#: src/diskio/movedatafilesjob.cpp:125 src/diskio/movedatafilesjob.cpp:161
+#, kde-format
+msgctxt "The destination of a file operation"
+msgid "Destination"
+msgstr "Mål"
+
+#: src/diskio/movedatafilesjob.cpp:159
+#, kde-format
+msgctxt "@title job"
+msgid "Moving"
+msgstr "Flytter"
+
+#: src/diskio/multifilecache.cpp:84 src/diskio/singlefilecache.cpp:71
+#, kde-format
+msgid "Failed to open %1: %2"
+msgstr "Klarte ikke åpne %1:  %2"
+
+#: src/diskio/piecedata.cpp:67 src/diskio/piecedata.cpp:105
+#, kde-format
+msgid "Unable to write to a piece mapped read only"
+msgstr "Klarer ikke å skrive til et stykke som er avbildet som skrivebeskyttet"
+
+#: src/download/chunkdownload.cpp:356
+#, kde-format
+msgid "1 peer"
+msgid_plural "%1 peers"
+msgstr[0] "1 deltaker"
+msgstr[1] "%1 deltakere"
+
+#: src/download/downloader.cpp:707
+#, kde-format
+msgid "Disabled because webseed does not match torrent"
+msgstr "Slått av fordi nettkilden ikke stemmer med torrenten"
+
+#: src/download/httpconnection.cpp:43 src/download/webseed.cpp:53
+#: src/download/webseed.cpp:98
+#, kde-format
+msgid "Not connected"
+msgstr "Ikke koblet til"
+
+#: src/download/httpconnection.cpp:110
+#, kde-format
+msgid "Resolving proxy %1:%2"
+msgstr "Gjør navneoppslag på mellomtjener %1:%2"
+
+#: src/download/httpconnection.cpp:114 src/download/httpconnection.cpp:128
+#, kde-format
+msgid "Not enough system resources available"
+msgstr "Ikke tilstrekkelige systemressurser tilgjengelige"
+
+#: src/download/httpconnection.cpp:124
+#, kde-format
+msgid "Resolving hostname %1"
+msgstr "Gjør navneoppslag på vertsnavnet %1"
+
+#: src/download/httpconnection.cpp:140 src/download/webseed.cpp:320
+#, kde-format
+msgid "Connection closed"
+msgstr "Tilkobling avsluttet"
+
+#: src/download/httpconnection.cpp:144
+#, kde-format
+msgid "Error: request failed: %1"
+msgstr "Feil, mislykket forespørsel: %1"
+
+#: src/download/httpconnection.cpp:168 src/download/httpconnection.cpp:195
+#, kde-format
+msgid "Connected"
+msgstr "Tilkoblet"
+
+#: src/download/httpconnection.cpp:176
+#, kde-format
+msgid "Error: Failed to connect to webseed"
+msgstr "Feil: klarte ikke koble til nettkilde"
+
+#: src/download/httpconnection.cpp:200
+#, kde-format
+msgid "Connecting"
+msgstr "Kobler til"
+
+#: src/download/httpconnection.cpp:209
+#, kde-format
+msgid "Failed to connect to webseed"
+msgstr "Klarte ikke koble til nettdelingstjener"
+
+#: src/download/httpconnection.cpp:214
+#, kde-format
+msgid "Failed to resolve hostname of webseed"
+msgstr "Klarte ikke slå opp vertsnavn for nettkilde"
+
+#: src/download/httpconnection.cpp:285
+#, kde-format
+msgid "Error: failed to connect, server not responding"
+msgstr "Feil: Klarte ikke koble til, tjeneren svarer ikke"
+
+#: src/download/httpconnection.cpp:295
+#, kde-format
+msgid "Error: request timed out"
+msgstr "Feil: tidsavbrudd for forespørsel"
+
+#: src/download/httpconnection.cpp:365
+#, kde-format
+msgid "Redirected without a new location."
+msgstr "Omdirigert uten nytt sted."
+
+#: src/download/webseed.cpp:507
+#, kde-format
+msgid "Unused for %1 second (Too many connection failures)"
+msgid_plural "Unused for %1 seconds (Too many connection failures)"
+msgstr[0] "Ikke i bruk i %1 sekund (for mange tilkoblingsfeil)"
+msgstr[1] "Ikke i bruk i %1 sekunder (for mange tilkoblingsfeil)"
+
+#: src/interfaces/trackerinterface.cpp:59
+#, kde-format
+msgid "OK"
+msgstr "OK"
+
+#: src/interfaces/trackerinterface.cpp:59
+#, kde-format
+msgid "Warning: %1"
+msgstr "Advarsel: %1"
+
+#: src/interfaces/trackerinterface.cpp:61
+#, kde-format
+msgid "Announcing"
+msgstr "Annonserer"
+
+#: src/interfaces/trackerinterface.cpp:63 src/torrent/torrentstats.cpp:100
+#, kde-format
+msgid "Error: %1"
+msgstr "Feil: %1"
+
+#: src/peer/peerid.cpp:313
+#, kde-format
+msgid "Unknown client"
+msgstr "Ukjent klient"
+
+#: src/torrent/torrent.cpp:110 src/torrent/torrent.cpp:167
+#: src/torrent/torrent.cpp:194 src/torrent/torrent.cpp:201
+#: src/torrent/torrent.cpp:208 src/torrent/torrent.cpp:212
+#: src/torrent/torrent.cpp:232 src/torrent/torrent.cpp:296
+#, kde-format
+msgid "Corrupted torrent."
+msgstr "Ødelagt torrent."
+
+#: src/torrent/torrentcontrol.cpp:291
+#, kde-format
+msgid "Error writing to disk, do you have enough diskspace?"
+msgstr "Feil ved skriving til disk, har du nok diskplass?"
+
+#: src/torrent/torrentcontrol.cpp:506
+#, kde-format
+msgid "An error occurred while loading <b>%1</b>:<br/><b>%2</b>"
+msgstr "Det oppsto en feil da <b>%1</b> ble lastet inn:<br/> <b>%2</b>"
+
+#: src/torrent/torrentcontrol.cpp:516
+#, kde-format
+msgid "Unable to create %1: %2"
+msgstr "Klarte ikke opprette %1: %2"
+
+#: src/torrent/torrentcontrol.cpp:529
+#, kde-format
+msgid ""
+"You are already downloading the torrent <b>%1</b>. The tracker lists from "
+"both torrents have been merged."
+msgstr ""
+"Du holder allerede på å laste ned denne torrenten <b>%1</b>. Sporerlistene "
+"fra begge torrentene er nå slått sammen."
+
+#: src/torrent/torrentcontrol.cpp:533
+#, kde-format
+msgid "You are already downloading the torrent <b>%1</b>."
+msgstr "Du laster allerede ned  torrenten <b>%1</b>."
+
+#: src/torrent/torrentcreator.cpp:346
+#, kde-format
+msgid "Cannot create index file: %1"
+msgstr "Klarte ikke lage indeksfil: %1"
+
+#: src/torrent/torrentstats.cpp:86
+#, kde-format
+msgid "Not started"
+msgstr "Ikke startet"
+
+#: src/torrent/torrentstats.cpp:88
+#, kde-format
+msgid "Download completed"
+msgstr "Nedlastingen er ferdig"
+
+#: src/torrent/torrentstats.cpp:90
+#, kde-format
+msgid "Seeding completed"
+msgstr "Deling ferdig"
+
+#: src/torrent/torrentstats.cpp:92
+#, kde-format
+msgctxt "Status of a torrent file"
+msgid "Seeding"
+msgstr "Deler"
+
+#: src/torrent/torrentstats.cpp:94
+#, kde-format
+msgid "Downloading"
+msgstr "Laster ned"
+
+#: src/torrent/torrentstats.cpp:96
+#, kde-format
+msgid "Stalled"
+msgstr "Stanset"
+
+#: src/torrent/torrentstats.cpp:98
+#, kde-format
+msgid "Stopped"
+msgstr "Stoppet"
+
+#: src/torrent/torrentstats.cpp:102
+#, kde-format
+msgid "Allocating diskspace"
+msgstr "Gjør klar diskplass"
+
+#: src/torrent/torrentstats.cpp:104
+#, kde-format
+msgid "Queued for seeding"
+msgstr "Køet for deling"
+
+#: src/torrent/torrentstats.cpp:104
+#, kde-format
+msgid "Queued for downloading"
+msgstr "Køet for nedlasting"
+
+#: src/torrent/torrentstats.cpp:108
+#, kde-format
+msgid "Stopped. No space left on device."
+msgstr "Stoppet. Ikke mer plass på disken."
+
+#: src/torrent/torrentstats.cpp:110
+#, kde-format
+msgid "Paused"
+msgstr "Pauset"
+
+#: src/torrent/torrentstats.cpp:112
+#, kde-format
+msgid "Superseeding"
+msgstr "Superdeling"
+
+#: src/tracker/httptracker.cpp:258 src/tracker/httptracker.cpp:274
+#: src/tracker/httptracker.cpp:407
+#, kde-format
+msgid "Invalid response from tracker"
+msgstr "Ugyldig svar fra sporeren"
+
+#: src/tracker/httptracker.cpp:268
+#, kde-format
+msgid "Invalid data from tracker"
+msgstr "Ugyldig data fra sporeren"
+
+#: src/tracker/httptracker.cpp:422
+#, kde-format
+msgid "Invalid tracker URL"
+msgstr "Ugyldig sporer-URL"
+
+#: src/tracker/httptracker.cpp:480 src/tracker/udptracker.cpp:329
+#: src/tracker/udptracker.cpp:336
+#, kde-format
+msgid "Timeout contacting tracker %1"
+msgstr "Tidsavbrudd ved kontakt med sporer %1"
+
+#: src/tracker/udptracker.cpp:357
+#, kde-format
+msgid "Unable to resolve hostname %1"
+msgstr "Klarte ikke slå opp vertsnavnet %1"
+
+#: src/upnp/httprequest.cpp:54
+#, kde-format
+msgid "Operation timed out"
+msgstr "Handlingen fikk tidsavbrudd"
+
+#: src/upnp/upnprouter.cpp:164
+#, kde-format
+msgid "Failed to download %1: %2"
+msgstr "Klarte ikke laste ned %1: %2"
+
+#: src/upnp/upnprouter.cpp:174
+#, kde-format
+msgid "Error parsing router description."
+msgstr "Klarte ikke tolke ruter-beskrivelse."
+
+#: src/upnp/upnprouter.cpp:208
+#, kde-format
+msgid ""
+"Forwarding failed:\n"
+"Device does not have a WANIPConnection or WANPPPConnection."
+msgstr ""
+"Klarte ikke videresende: \n"
+"Enheten støtter ikke WANIPConnection eller WANPPPConnection."
+
+#: src/upnp/upnprouter.cpp:287
+#, kde-format
+msgid "Cannot find port forwarding service in the device's description."
+msgstr ""
+"Klarte ikke finne tjenesten for videresending av porter i enhetens "
+"beskrivelse."
+
+#: src/util/file.cpp:82
+#, kde-format
+msgid "Cannot write to %1: %2"
+msgstr "Klarte ikke skrive til %1: %2"
+
+#: src/util/file.cpp:95
+#, kde-format
+msgid "Cannot read from %1"
+msgstr "Klarte ikke lese fra %1"
+
+#: src/util/fileops.cpp:105
+#, kde-format
+msgid "Cannot create directory %1"
+msgstr "Kan ikke opprette mappa %1"
+
+#: src/util/fileops.cpp:163
+#, kde-format
+msgid "Cannot symlink %1 to %2: %3"
+msgstr "Klarte ikke opprette en symbolsk lenke fra %1 til %2: %3"
+
+#: src/util/fileops.cpp:176
+#, kde-format
+msgid "Cannot move %1 to %2: %3"
+msgstr "Klarte ikke flytte %1 til %2: %3"
+
+#: src/util/fileops.cpp:187 src/util/fileops.cpp:198
+#, kde-format
+msgid "Cannot copy %1 to %2: %3"
+msgstr "Klarte ikke kopiere %1 til %2: %3"
+
+#: src/util/fileops.cpp:252
+#, kde-format
+msgid "Cannot delete %1: %2"
+msgstr "Klarte ikke slette %1: %2"
+
+#: src/util/fileops.cpp:268
+#, kde-format
+msgid "Cannot create %1: %2"
+msgstr "Kan ikke opprette %1: %2"
+
+#: src/util/fileops.cpp:285
+#, kde-format
+msgid "Cannot calculate the filesize of %1: %2"
+msgstr "Klarte ikke beregne filstørrelsen på %1: %2"
+
+#: src/util/fileops.cpp:301
+#, kde-format
+msgid "Cannot calculate the filesize: %1"
+msgstr "Klarte ikke beregne filstørrelse: %1"
+
+#: src/util/fileops.cpp:346 src/util/fileops.cpp:350 src/util/fileops.cpp:353
+#: src/util/fileops.cpp:356 src/util/fileops.cpp:359
+#, kde-format
+msgid "Cannot expand file: %1"
+msgstr "Klarte ikke utvide fil: %1"
+
+#: src/util/fileops.cpp:386
+#, kde-format
+msgid "Cannot seek in file: %1"
+msgstr "Klarte ikke søke i fil: %1"
+
+#: src/util/fileops.cpp:627
+#, kde-format
+msgid "Unable to open file %1: %2"
+msgstr "Kan ikke åpne fil %1: %2"
+
+#: src/util/functions.cpp:219
+#, kde-format
+msgid "%1/s"
+msgstr "%1/s"
+
+#: src/util/functions.cpp:228
+#, kde-format
+msgid "1 day "
+msgid_plural "%1 days "
+msgstr[0] "1 dag "
+msgstr[1] "%1 dager "
+
+#: src/util/logsystemmanager.cpp:33
+#, kde-format
+msgid "General"
+msgstr "Generelt"
+
+#: src/util/logsystemmanager.cpp:34
+#, kde-format
+msgid "Connections"
+msgstr "Forbindelser"
+
+#: src/util/logsystemmanager.cpp:35
+#, kde-format
+msgid "Tracker"
+msgstr "Sporer"
+
+#: src/util/logsystemmanager.cpp:36
+#, kde-format
+msgid "DHT"
+msgstr "DHT"
+
+#: src/util/logsystemmanager.cpp:37
+#, kde-format
+msgid "Disk Input/Output"
+msgstr "Diskaktivitet"
+
+#: src/util/logsystemmanager.cpp:38
+#, kde-format
+msgid "µTP"
+msgstr "µTP"
+
+#: src/util/signalcatcher.cpp:76
+#, kde-format
+msgid "Error when writing to disk"
+msgstr "Feil ved skriving til disk"
+
+#: src/util/signalcatcher.cpp:76
+#, kde-format
+msgid "Error when reading from disk"
+msgstr "Feil ved lesing fra disk"

@@ -1,0 +1,72 @@
+Source: libktorrent
+Section: libs
+Priority: optional
+Maintainer: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Uploaders: Norbert Preining <norbert@preining.info>,
+Build-Depends: cmake (>= 3.16~),
+               debhelper-compat (= 13),
+               extra-cmake-modules (>= 5.82~),
+               gettext,
+               libboost-dev (>= 1.71.0~),
+               libgcrypt20-dev (>= 1.4.5~),
+               libgmp-dev,
+               libkf5archive-dev (>= 5.82~),
+               libkf5crash-dev (>= 5.82~),
+               libkf5i18n-dev (>= 5.82~),
+               libkf5kio-dev (>= 5.82~),
+               libkf5solid-dev (>= 5.82~),
+               libqca-qt5-2-dev,
+               pkg-config,
+               pkg-kde-tools (>= 0.15.16),
+               qtbase5-dev (>= 5.15.0~),
+Standards-Version: 4.5.1
+Rules-Requires-Root: no
+Homepage: https://www.kde.org/applications/internet/ktorrent/
+Vcs-Git: https://salsa.debian.org/qt-kde-team/extras/libktorrent.git
+Vcs-Browser: https://salsa.debian.org/qt-kde-team/extras/libktorrent
+
+Package: libkf5torrent6abi2
+X-Debian-ABI: 2
+X-CMake-Target: KF5Torrent
+Architecture: any
+Multi-Arch: same
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Suggests: libktorrent-l10n (>= ${source:Version})
+Description: KTorrent library for C++ / Qt 5 / KDE Frameworks
+ The KTorrent library is a C++ / Qt 5 / KDE Frameworks based implementation of
+ the BitTorrent protocol (mostly client side).
+ .
+ The library supports connectivity to HTTP and UDP trackers, mainline DHT and
+ the new generation Micro Transport Protocol (uTP). In addition, it provides
+ many powerful BitTorrent network features including but not limited to torrent
+ downloading and seeding, torrent creation and downloaded data verification,
+ magnet links, advanced peer management, IP blocking lists.
+
+Package: libktorrent-dev
+Architecture: any
+Section: libdevel
+Depends: libboost-dev (>= 1.71.0~),
+         libgcrypt20-dev (>= 1.4.5~),
+         libgmp-dev,
+         libkf5torrent6abi2 (= ${binary:Version}),
+         ${misc:Depends},
+         ${sameVersionDep:libkf5archive-dev},
+         ${sameVersionDep:libkf5config-dev},
+         ${sameVersionDep:libkf5kio-dev},
+         ${sameVersionDep:qtbase5-dev},
+Description: development files for the KTorrent Library
+ The KTorrent library is a C++ / Qt 5 / KDE Frameworks based implementation of
+ the BitTorrent protocol (mostly client side).
+ .
+ This package contains header files, CMake modules and other files needed for
+ developing and compiling/linking which use the KTorrent library.
+
+Package: libktorrent-l10n
+Architecture: all
+Section: localization
+Depends: ${misc:Depends}
+Description: localization files for the KTorrent library
+ The KTorrent library is a C++ / Qt 5 / KDE Frameworks based implementation of
+ the BitTorrent protocol (mostly client side).
+ .
+ This package contains translations of the KTorrent library.

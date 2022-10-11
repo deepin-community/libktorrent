@@ -1,0 +1,15 @@
+Author: Pino Toscano <pino@debian.org>
+Description: Use the Debian ABI manager
+ Make use of the Debian ABI manager to handle libraries which had ABI breaks
+ with no SONAME bump.
+Last-Update: 2020-08-05
+Forwarded: not-needed
+
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -147,3 +147,5 @@ kde_configure_git_pre_commit_hook(CHECKS
+ feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
+ 
+ ki18n_install(po)
++
++include(/usr/share/pkg-kde-tools/cmake/DebianABIManager.cmake)

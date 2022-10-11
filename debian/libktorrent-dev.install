@@ -1,0 +1,3 @@
+usr/include/KF5/libktorrent/
+usr/lib/*/cmake/KF5Torrent/
+usr/lib/*/libKF5Torrent.so

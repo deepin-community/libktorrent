@@ -1,0 +1,370 @@
+libktorrent (21.08.0-2) unstable; urgency=medium
+
+  * Source-only upload.
+
+ -- Norbert Preining <norbert@preining.info>  Wed, 20 Oct 2021 16:11:31 +0900
+
+libktorrent (21.08.0-1) unstable; urgency=medium
+
+  [ Norbert Preining ]
+  * New upstream release within KDE Gears (21.08.0).
+  * Update watch file.
+  * Add upstream signing key.
+  * Update build-deps and deps with the info from cmake.
+  * Update patch.
+  * Removed Modestas Vainius from the uploaders, thanks for your work on
+    the package!
+  * Added myself to the uploaders.
+  * Update maintainer to Qt/KDE Team.
+  * ABI bump due to severe change of symbols/ABI:
+    - rename library to libkf5torrent6abi2
+    - update symbols, installed files
+
+ -- Norbert Preining <norbert@preining.info>  Fri, 20 Aug 2021 11:42:50 +0900
+
+libktorrent (2.2.0-3) unstable; urgency=medium
+
+  * Team upload.
+  * Bump Standards-Version to 4.5.1, no changes required.
+  * Update the symbols file from the logs of buildds; also prepare for
+    boost 1.74. (Closes: #975445)
+
+ -- Pino Toscano <pino@debian.org>  Sun, 22 Nov 2020 14:57:39 +0100
+
+libktorrent (2.2.0-2) unstable; urgency=medium
+
+  * Team upload.
+  * Upload to unstable.
+
+ -- Pino Toscano <pino@debian.org>  Fri, 07 Aug 2020 16:57:25 +0200
+
+libktorrent (2.2.0-1) experimental; urgency=medium
+
+  * Team upload.
+  * New upstream release.
+  * Explicitly add the gettext build dependency.
+  * Bump the debhelper compatibility to 13:
+    - switch the debhelper build dependency to debhelper-compat 13
+    - remove debian/compat
+  * Add Rules-Requires-Root: no.
+  * Bump Standards-Version to 4.5.0, no changes required.
+  * Add the configuration for the CI on salsa.
+  * libkf5torrent6 had an ABI break with no SONAME bump, so:
+    - apply the Debian ABI manager; patch enable_debianabimanager.diff
+    - rename libkf5torrent6 to libkf5torrent6abi1
+  * Update symbols file.
+
+ -- Pino Toscano <pino@debian.org>  Wed, 05 Aug 2020 08:38:43 +0200
+
+libktorrent (2.1.1-2) unstable; urgency=medium
+
+  * Team upload.
+  * Update symbols files from buildd's logs.
+
+ -- Pino Toscano <pino@debian.org>  Sat, 28 Sep 2019 21:22:51 +0200
+
+libktorrent (2.1.1-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream release.
+  * Switch Vcs-* fields to salsa.debian.org.
+  * Bump the debhelper compatibility to 11:
+    - bump compat to 11
+    - bump the debhelper build dependency to 11
+    - remove --parallel to dh
+  * Bump Standards-Version to 4.4.0, no changes required.
+  * Update symbols file.
+  * Switch watch file to https.
+
+ -- Pino Toscano <pino@debian.org>  Sat, 14 Sep 2019 14:53:31 +0200
+
+libktorrent (2.1-2) unstable; urgency=medium
+
+  * Team upload.
+  * Update symbols files from buildd's logs.
+  * Remove the doxygen build dependency, since the API docs are not generated
+    anyway.
+  * Bump Standards-Version to 4.1.0, no changes required.
+  * Upload to unstable.
+
+ -- Pino Toscano <pino@debian.org>  Tue, 05 Sep 2017 21:03:17 +0200
+
+libktorrent (2.1-1) experimental; urgency=medium
+
+  * Team upload.
+  * New upstream release.
+  * Update the patches:
+    - cmake-gcrypt-version.diff: drop, obsolete
+  * Replace deprecated build dependencies:
+    - kio-dev -> libkf5kio-dev
+  * Rename libktorrent6 to libkf5torrent6, according to the new library name.
+  * Update install files.
+  * Update symbols files. (Closes: #853495)
+  * Do not pass -DCMAKE_USE_RELATIVE_PATHS=ON to cmake, as this option is gone
+    since cmake 3.2.
+  * No need to manually append CPPFLAGS to CFLAGS and CXXFLAGS, as dh 9 does
+    that already.
+  * Pass -DBUILD_TESTING=OFF to disable the building of unit tests: they are
+    not executed already, and a quick test here shows that they fail (most
+    probably to the lack of networking).
+  * Remove the libkf5torrent6 dependency in libktorrent-l10n, since the latter
+    is only a package with data.
+
+ -- Pino Toscano <pino@debian.org>  Fri, 01 Sep 2017 09:26:10 +0200
+
+libktorrent (2.0.1-1) experimental; urgency=medium
+
+  * Team upload.
+  * New upstream release.
+  * Update the build dependencies following the port to Frameworks:
+    - remove kdelibs5-dev and libqca2-dev
+    - add extra-cmake-modules, qtbase5-dev, libkf5archive-dev, libkf5crash-dev,
+      libkf5i18n-dev, kio-dev, libkf5solid-dev, and libqca-qt5-2-dev
+  * Use the right dh addon:
+    - switch from kde to kf5 dh addon
+    - bump the pkg-kde-tools build dependency to >= 0.15.16
+  * Rename libktorrent5 to libktorrent6, following the SONAME bump.
+  * Update the patches:
+    - upstream_don-t-include-circular_buffer-in-moc-run.patch: drop,
+      backported from upstream
+    - set-pathmax.diff: refresh
+  * Fix extraction in cmake of the libcrypt version; patch
+    cmake-gcrypt-version.diff.
+  * Update install files.
+  * Update symbols file.
+  * Remove libktorrent-dbg in favour of the -dbgsym packages.
+  * Update dependencies in libktorrent-dev.
+  * Update Vcs-* fields.
+  * Switch Homepage away from the dead ktorrent.org.
+  * Add a watch file.
+  * Bump Standards-Version to 3.9.8, no changes required.
+  * Mark libktorrent6 as "Multi-Arch: same".
+  * Small updates in the descriptions.
+  * Replace (build) dependencies with non-transitional packages:
+    - libgmp3-dev -> libgmp-dev
+    - libgcrypt11-dev -> libgcrypt20-dev
+  * Minor copyright update.
+
+ -- Pino Toscano <pino@debian.org>  Sun, 03 Jul 2016 22:20:07 +0200
+
+libktorrent (1.3.1-5) unstable; urgency=medium
+
+  * Team upload.
+  * Update symbols from build logs
+  * Add definition of PATH_MAX when not otherwise defined to fix FTBFS on
+    hurd-i386 (Closes: #762581)
+    - Thanks to Svante Signell for the patch
+
+ -- Scott Kitterman <scott@kitterman.com>  Sun, 30 Aug 2015 17:12:30 -0400
+
+libktorrent (1.3.1-4) unstable; urgency=medium
+
+  * Team upload.
+
+  [ Matthias Klose ]
+  * Update symbols file for GCC 5. (Closes: #777954)
+
+  [ Harald Sitter ]
+  * Add upstream_don-t-include-circular_buffer-in-moc-run.patch from upstream
+    to not include the circular_buffer boost header during meta object
+    compilation as it causes Qt4's MOC to fail on BOOST_JOIN which it cannot
+    process due to implementation limitations.
+
+  [ Adam Conrad ]
+  * Build-depend on libgcrypt11-dev
+
+  [ Scott Kitterman ]
+  * Backport gcc5 and boost1.58 changes from Ubuntu
+  * Bump standards version to 3.9.6 without further change
+
+ -- Scott Kitterman <scott@kitterman.com>  Sun, 30 Aug 2015 01:10:33 -0400
+
+libktorrent (1.3.1-3) unstable; urgency=low
+
+  * Confirm symbols file on all arches, fixes FTBFSes.
+
+ -- Modestas Vainius <modax@debian.org>  Wed, 06 Nov 2013 11:00:48 +0200
+
+libktorrent (1.3.1-2) unstable; urgency=low
+
+  * Make libktorrent suggest greater or equal version of -l10n.
+  * Bump Standards-Version to 3.9.5: no further changes needed.
+  * Update Vcs URL in debian/control to canonical ones.
+  * Update symbols file for boost 1.54 and gcc 4.8.
+  * Build with hardening flags.
+  * Upload to unstable.
+
+ -- Modestas Vainius <modax@debian.org>  Sun, 27 Jan 2013 14:11:29 +0200
+
+libktorrent (1.3.1-1) experimental; urgency=low
+
+  * New upstream release.
+
+ -- Modestas Vainius <modax@debian.org>  Sun, 27 Jan 2013 11:36:04 +0200
+
+libktorrent (1.3.0-1) experimental; urgency=low
+
+  * New upstream release.
+  * SOVERSION changed to 5, make appropriate changes in packaging.
+  * Update symbol file, all symbols are at version 1.3.0 now.
+  * Bump Standards-Version to 3.9.4: no changes needed.
+
+ -- Modestas Vainius <modax@debian.org>  Sun, 30 Sep 2012 00:35:07 +0300
+
+libktorrent (1.2.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * Confirm symbol file on all arches.
+  * Update symbol file for 1.2.1.
+
+ -- Modestas Vainius <modax@debian.org>  Thu, 21 Jun 2012 21:51:35 +0300
+
+libktorrent (1.2.0-1.1) unstable; urgency=low
+
+  * Non maintainer upload
+  * Mark symbols as optional, missing when build with GCC 4.7. Closes: #671957.
+
+ -- Matthias Klose <doko@debian.org>  Wed, 30 May 2012 01:31:31 +0000
+
+libktorrent (1.2.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * SOVERSION changed to 4, update packaging accordingly.
+  * Bump Standards-Version to 3.9.3: no changes needed.
+  * Update symbol file.
+  * Build-depend on debhelper 9 as lintian insists.
+
+ -- Modestas Vainius <modax@debian.org>  Sat, 10 Mar 2012 21:10:47 +0200
+
+libktorrent (1.1.3-1) unstable; urgency=low
+
+  * New upstream release.
+  * Bump debhelper compat level to 9 and require debhelper 8.9.0 in order to
+    gain support for transparent dpkg-buildflags handling in dh/dh_auto_*.
+  * Update symbol file (for 1.1.2/ia64, 1.1.2/sparc), fixes FTBFSes.
+  * Update symbol file for 1.1.3/amd64, source changes.
+
+ -- Modestas Vainius <modax@debian.org>  Tue, 06 Dec 2011 00:56:03 +0200
+
+libktorrent (1.1.2-1) unstable; urgency=low
+
+  * New upstream release.
+  * Update symbol file.
+
+ -- Modestas Vainius <modax@debian.org>  Thu, 18 Aug 2011 00:59:20 +0300
+
+libktorrent (1.1.1-2) unstable; urgency=low
+
+  * Release to unstable.
+
+ -- Modestas Vainius <modax@debian.org>  Thu, 26 May 2011 00:33:38 +0300
+
+libktorrent (1.1.1-1) experimental; urgency=low
+
+  * New upstream release.
+  * Bump Standards-Version to 3.9.2: no changes needed.
+  * Call dh in compat=8 way.
+  * Drop dh_makeshlibs override: do not care about shlibs anymore.
+  * Update symbol file (gcc 4.6 on amd64).
+
+ -- Modestas Vainius <modax@debian.org>  Tue, 03 May 2011 00:30:10 +0300
+
+libktorrent (1.1.0-1) experimental; urgency=low
+
+  * New upstream release.
+  * Update symbol file.
+  * Do not start libktorrent3 synopsis with an article.
+
+ -- Modestas Vainius <modax@debian.org>  Wed, 23 Mar 2011 02:07:58 +0200
+
+libktorrent (1.1~rc1-1) experimental; urgency=low
+
+  * New upstream release.
+  * SONAME was bumped: rename libktorrent2 to libktorrent3.
+  * Update debian/copyright.
+  * Build depend on kdelibs5-dev 4.4.
+  * Build depend on libgcrypt-dev.
+  * Update symbol file.
+
+ -- Modestas Vainius <modax@debian.org>  Sat, 19 Feb 2011 01:25:05 +0200
+
+libktorrent (1.0.5-2) unstable; urgency=low
+
+  * Release to unstable.
+
+ -- Modestas Vainius <modax@debian.org>  Tue, 01 Feb 2011 00:43:00 +0200
+
+libktorrent (1.0.5-1) experimental; urgency=low
+
+  * New upstream release.
+
+ -- Modestas Vainius <modax@debian.org>  Thu, 30 Dec 2010 12:14:33 +0200
+
+libktorrent (1.0.4-1) experimental; urgency=low
+
+  * New upstream release.
+  * Confirm symbol file for 1.0.3 on more arches.
+
+ -- Modestas Vainius <modax@debian.org>  Wed, 20 Oct 2010 14:43:22 +0300
+
+libktorrent (1.0.3-2) experimental; urgency=low
+
+  * Confirm symbol file on more arches. Fixes FTBFS. (Closes: #598506)
+
+ -- Modestas Vainius <modax@debian.org>  Sat, 02 Oct 2010 01:55:17 +0300
+
+libktorrent (1.0.3-1) experimental; urgency=low
+
+  * New upstream release.
+  * Update symbol file.
+  * Bump Standards-Version to 3.9.1: no changes needed.
+
+ -- Modestas Vainius <modax@debian.org>  Wed, 29 Sep 2010 00:29:18 +0300
+
+libktorrent (1.0.2-1) unstable; urgency=low
+
+  * New upstream release.
+  * Rename library package to libktorrent2, SONAME has been bumped:
+    - rename references in debian/control;
+    - rename install and symbol files;
+    - bump minver of all symbols to 1.0.2 in the symbol file;
+    - change package name and soname in debian/libktorrent2.symbols;
+    - change file path in debian/libktorrent2.install.
+  * Enable parallel support, pass --parallel to dh.
+  * Update symbol file for 1.0.2 release.
+  * Bump Standards-Version to 3.9.0: no changes needed.
+
+ -- Modestas Vainius <modax@debian.org>  Thu, 08 Jul 2010 22:25:50 +0300
+
+libktorrent (1.0.1-2) unstable; urgency=low
+
+  * Set versions of the UTPServer class symbols to 1.0.1.
+
+ -- Modestas Vainius <modax@debian.org>  Tue, 15 Jun 2010 11:21:52 +0300
+
+libktorrent (1.0.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * Drop general_disable_ipv6_only.diff patch, merged upstream.
+  * Update libktorrent1.symbols for 1.0.1.
+  * Add "Build-Depends-Package" field to libktorrent1.symbols.
+
+ -- Modestas Vainius <modax@debian.org>  Tue, 15 Jun 2010 01:25:07 +0300
+
+libktorrent (1.0.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Explicitly disable IPV6_V6ONLY for tcp/udp server sockets
+    (Closes: #581896). The proper solution (2 sockets) will be in the next
+    major upstream release (patch general_disable_ipv6_only.diff).
+  * License files are in upstream tarball now, remove the respective note from
+    debian/copyright.
+  * Add debian/README.source.
+
+ -- Modestas Vainius <modax@debian.org>  Fri, 28 May 2010 21:06:51 +0300
+
+libktorrent (1.0~rc1+dfsg.1-1) unstable; urgency=low
+
+  * Initial release.
+
+ -- Modestas Vainius <modax@debian.org>  Sat, 08 May 2010 21:49:44 +0300
