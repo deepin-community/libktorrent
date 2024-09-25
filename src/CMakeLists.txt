@@ -234,27 +234,31 @@ generate_export_header(KF5Torrent BASE_NAME ktorrent)
 
 target_link_libraries(KF5Torrent
 PRIVATE
-    qca-qt5
+    qca-qt${QT_MAJOR_VERSION}
 PUBLIC
     KF5::Archive
     KF5::KIOCore
     KF5::KIOWidgets
     KF5::Solid
     KF5::I18n
-    Qt5::Xml
+    Qt::Xml
     Boost::boost
     LibGcrypt::LibGcrypt
     LibGMP::LibGMP
 )
 
+if (QT_MAJOR_VERSION EQUAL "6")
+    target_link_libraries(KF5Torrent PUBLIC Qt6::Core5Compat)
+endif()
+
 if(WIN32)
 target_link_libraries(KF5Torrent ws2_32)
 endif(WIN32)
-target_include_directories(KF5Torrent INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/libktorrent>")
+target_include_directories(KF5Torrent INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/libktorrent>")
 target_include_directories(KF5Torrent PUBLIC "$<BUILD_INTERFACE:${LIBKTORRENT_SOURCE_DIR}/src;${LIBKTORRENT_BINARY_DIR}/src;${LIBKTORRENT_BINARY_DIR}>")
 
 
-install(TARGETS KF5Torrent EXPORT KF5TorrentTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KF5Torrent EXPORT KF5TorrentTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 
 set (interfaces_HDR
     interfaces/peerinterface.h
@@ -289,10 +293,10 @@ set (bcodec_HDR
     bcodec/value.h
 )
 
-install(FILES ${bcodec_HDR} DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/libktorrent/bcodec COMPONENT Devel)
-install(FILES ${interfaces_HDR} DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/libktorrent/interfaces COMPONENT Devel)
-install(FILES ${migrate_HDR} DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/libktorrent/migrate COMPONENT Devel)
-install(FILES ${ktorrent_HDR} DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/libktorrent COMPONENT Devel)
+install(FILES ${bcodec_HDR} DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/libktorrent/bcodec COMPONENT Devel)
+install(FILES ${interfaces_HDR} DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/libktorrent/interfaces COMPONENT Devel)
+install(FILES ${migrate_HDR} DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/libktorrent/migrate COMPONENT Devel)
+install(FILES ${ktorrent_HDR} DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/libktorrent COMPONENT Devel)
 
 add_subdirectory(torrent)
 add_subdirectory(datachecker)

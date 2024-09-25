@@ -1,22 +1,8 @@
-/***************************************************************************
- *   Copyright (C) 2005 by Joris Guisson                                   *
- *   joris.guisson@gmail.com                                               *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.          *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2005 Joris Guisson <joris.guisson@gmail.com>
+
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 #include "packetsocket.h"
 #include "speed.h"
 #include <net/socketmonitor.h>
@@ -29,6 +15,7 @@ namespace net
 PacketSocket::PacketSocket(SocketDevice *sock)
     : TrafficShapedSocket(sock)
     , ctrl_packets_sent(0)
+    , pending_upload_data_bytes(0)
     , uploaded_data_bytes(0)
 {
 }
@@ -36,6 +23,7 @@ PacketSocket::PacketSocket(SocketDevice *sock)
 PacketSocket::PacketSocket(int fd, int ip_version)
     : TrafficShapedSocket(fd, ip_version)
     , ctrl_packets_sent(0)
+    , pending_upload_data_bytes(0)
     , uploaded_data_bytes(0)
 {
 }
@@ -43,6 +31,7 @@ PacketSocket::PacketSocket(int fd, int ip_version)
 PacketSocket::PacketSocket(bool tcp, int ip_version)
     : TrafficShapedSocket(tcp, ip_version)
     , ctrl_packets_sent(0)
+    , pending_upload_data_bytes(0)
     , uploaded_data_bytes(0)
 {
 }
@@ -96,6 +85,7 @@ Uint32 PacketSocket::write(Uint32 max, bt::TimeStamp now)
             QMutexLocker locker(&mutex);
             if (curr_packet->getType() == PIECE) {
                 up_speed->onData(ret, now);
+                pending_upload_data_bytes -= ret;
                 uploaded_data_bytes += ret;
             }
         } else
@@ -127,10 +117,12 @@ Uint32 PacketSocket::write(Uint32 max, bt::TimeStamp now)
 
 void PacketSocket::addPacket(Packet::Ptr packet)
 {
+    Q_ASSERT(!packet->sending());
     QMutexLocker locker(&mutex);
-    if (packet->getType() == PIECE)
+    if (packet->getType() == PIECE) {
         data_packets.push_back(packet);
-    else
+        pending_upload_data_bytes += packet->getDataLength();
+    } else
         control_packets.push_back(packet);
     // tell upload thread we have data ready should it be sleeping
     net::SocketMonitor::instance().signalPacketReady();
@@ -165,7 +157,7 @@ void PacketSocket::clearPieces(bool reject)
         if (p->getType() == bt::PIECE && !p->sending() && curr_packet != p) {
             if (reject)
                 addPacket(Packet::Ptr(p->makeRejectOfPiece()));
-
+            pending_upload_data_bytes -= p->getDataLength();
             i = data_packets.erase(i);
         } else {
             i++;
@@ -180,6 +172,7 @@ void PacketSocket::doNotSendPiece(const bt::Request &req, bool reject)
     while (i != data_packets.end()) {
         Packet::Ptr p = *i;
         if (p->isPiece(req) && !p->sending() && p != curr_packet) {
+            pending_upload_data_bytes -= p->getDataLength();
             i = data_packets.erase(i);
             if (reject) {
                 // queue a reject packet
@@ -195,6 +188,12 @@ Uint32 PacketSocket::numPendingPieceUploads() const
 {
     QMutexLocker locker(&mutex);
     return data_packets.size();
+}
+
+Uint32 PacketSocket::numPendingPieceUploadBytes() const
+{
+    QMutexLocker locker(&mutex);
+    return pending_upload_data_bytes;
 }
 
 }

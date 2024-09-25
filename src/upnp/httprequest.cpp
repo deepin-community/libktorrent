@@ -1,22 +1,8 @@
-/***************************************************************************
- *   Copyright (C) 2005-2007 by Joris Guisson                              *
- *   joris.guisson@gmail.com                                               *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.          *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2005-2007 Joris Guisson <joris.guisson@gmail.com>
+
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "httprequest.h"
 #include <QHostAddress>
@@ -39,7 +25,6 @@ HTTPRequest::HTTPRequest(const QNetworkRequest &hdr, const QString &payload, con
     , success(false)
 {
     networkAccessManager = new QNetworkAccessManager(this);
-    connect(networkAccessManager, &QNetworkAccessManager::finished, this, &HTTPRequest::replyFinished);
     networkAccessManager->connectToHost(host, port);
 
     QTcpSocket socket;
@@ -63,10 +48,11 @@ HTTPRequest::HTTPRequest(const QNetworkRequest &hdr, const QString &payload, con
 
 void HTTPRequest::start()
 {
-    networkAccessManager->post(hdr, m_payload.toLatin1());
+    networkReply = networkAccessManager->post(hdr, m_payload.toLatin1());
+    connect(networkReply, &QNetworkReply::finished, this, &HTTPRequest::replyFinished);
 }
 
-void HTTPRequest::replyFinished(QNetworkReply *networkReply)
+void HTTPRequest::replyFinished()
 {
     if (networkReply->error()) {
         error = networkReply->errorString();
@@ -76,6 +62,7 @@ void HTTPRequest::replyFinished(QNetworkReply *networkReply)
         return;
     }
     reply = networkReply->readAll();
+    networkReply->deleteLater();
     success = true;
     Q_EMIT result(this);
     operationFinished(this);

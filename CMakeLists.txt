@@ -3,16 +3,16 @@ cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 cmake_policy(SET CMP0057 NEW)
 
 # KDE Application Version, managed by release script
-set (RELEASE_SERVICE_VERSION_MAJOR "21")
-set (RELEASE_SERVICE_VERSION_MINOR "08")
-set (RELEASE_SERVICE_VERSION_MICRO "0")
+set (RELEASE_SERVICE_VERSION_MAJOR "22")
+set (RELEASE_SERVICE_VERSION_MINOR "12")
+set (RELEASE_SERVICE_VERSION_MICRO "3")
 set (RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_VERSION_MINOR}.${RELEASE_SERVICE_VERSION_MICRO}")
 
 
 set(Boost_MIN_VERSION "1.71.0")
 set(LibGMP_MIN_VERSION "6.0.0")
 set(LibGcrypt_MIN_VERSION "1.4.5")
-set(KF5_MIN_VERSION "5.82")
+set(KF5_MIN_VERSION "5.85")
 set(QT_MIN_VERSION "5.15.0")
 
 set (SOVERSION 6)
@@ -22,9 +22,9 @@ project(LIBKTORRENT VERSION ${RELEASE_SERVICE_VERSION})
 # set some default settings
 enable_testing()
 
-find_package(ECM ${KF5_MIN_VERSION}  NO_MODULE)
+find_package(ECM ${KF5_MIN_VERSION} NO_MODULE)
 
-set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${ECM_MODULE_PATH})
 
 #
 # checks for functions and stuff
@@ -35,7 +35,8 @@ include(CheckTypeSize) #XFS
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
-include(KDECompilerSettings  NO_POLICY_SCOPE)
+set(KDE_COMPILERSETTINGS_LEVEL "5.82")
+include(KDECompilerSettings NO_POLICY_SCOPE)
 include(FeatureSummary)
 include(GenerateExportHeader)
 include(ECMMarkAsTest)
@@ -52,7 +53,7 @@ ecm_setup_version(${RELEASE_SERVICE_VERSION} VARIABLE_PREFIX LIBKTORRENT
                         PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5TorrentConfigVersion.cmake"
                         SOVERSION "${SOVERSION}")
 
-find_package(Qt5 "${QT_MIN_VERSION}" CONFIG REQUIRED COMPONENTS
+find_package(Qt${QT_MAJOR_VERSION} "${QT_MIN_VERSION}" CONFIG REQUIRED COMPONENTS
     Core
     Network
     Xml
@@ -71,7 +72,7 @@ find_package(KF5 "${KF5_MIN_VERSION}" REQUIRED COMPONENTS
 find_package(Boost "${Boost_MIN_VERSION}" MODULE REQUIRED)
 find_package(LibGMP "${LibGMP_MIN_VERSION}" REQUIRED)
 find_package(LibGcrypt "${LibGcrypt_MIN_VERSION}" REQUIRED)
-find_package(Qca-qt5 CONFIG REQUIRED)
+find_package(Qca-qt${QT_MAJOR_VERSION} CONFIG REQUIRED)
 
 kde_enable_exceptions()
 add_definitions(
@@ -126,7 +127,7 @@ set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5Torrent")
 configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/KF5TorrentConfig.cmake.in"
                               "${CMAKE_CURRENT_BINARY_DIR}/KF5TorrentConfig.cmake"
                               INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
-                              PATH_VARS INCLUDE_INSTALL_DIR
+                              PATH_VARS KDE_INSTALL_INCLUDEDIR
                               )
 
 # Install the CMake modules needed to use libktorrent
@@ -139,6 +140,8 @@ install(FILES  "${CMAKE_CURRENT_BINARY_DIR}/KF5TorrentConfig.cmake"
 
 install(EXPORT KF5TorrentTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KF5TorrentTargets.cmake NAMESPACE KF5:: )
 
+ki18n_install(po)
+
 # add clang-format target for all our real source files
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
 kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
@@ -146,4 +149,3 @@ kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
-ki18n_install(po)
