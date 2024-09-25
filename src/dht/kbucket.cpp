@@ -1,22 +1,8 @@
-/***************************************************************************
- *   Copyright (C) 2005 by Joris Guisson                                   *
- *   joris.guisson@gmail.com                                               *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.             *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2005 Joris Guisson <joris.guisson@gmail.com>
+
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 #include "kbucket.h"
 #include "kclosestnodessearch.h"
 #include "pingreq.h"
@@ -177,7 +163,13 @@ void KBucket::onTimeout(RPCCall *c)
 void KBucket::pingQuestionable(const KBucketEntry &replacement_entry)
 {
     if (pending_entries_busy_pinging.count() >= 2) {
-        pending_entries.append(replacement_entry); // lets not have to many pending_entries calls going on
+        // let's not have too many pending_entries calls going on
+        pending_entries.removeOne(replacement_entry); // drop any existing duplicate
+        while (pending_entries.count() >= (int)dht::K) { // limit number of pending entries
+            pending_entries.removeLast(); // drop stalest
+        }
+        // insert replacement entry at front to keep freshest first
+        pending_entries.prepend(replacement_entry);
         return;
     }
 

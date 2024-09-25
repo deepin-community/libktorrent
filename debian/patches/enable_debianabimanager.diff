@@ -7,9 +7,8 @@ Forwarded: not-needed
 
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -147,3 +147,5 @@ kde_configure_git_pre_commit_hook(CHECKS
+@@ -149,3 +149,4 @@ kde_configure_git_pre_commit_hook(CHECKS
+
  feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
- 
- ki18n_install(po)
-+
+
 +include(/usr/share/pkg-kde-tools/cmake/DebianABIManager.cmake)

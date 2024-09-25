@@ -1,26 +1,14 @@
-/***************************************************************************
- *   Copyright (C) 2010 by Joris Guisson                                   *
- *   joris.guisson@gmail.com                                               *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.          *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2010 Joris Guisson <joris.guisson@gmail.com>
+
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "kioannouncejob.h"
 #include <kio/job.h>
 #include <util/log.h>
+
+#include <kio_version.h>
 
 namespace bt
 {
@@ -64,7 +52,11 @@ void KIOAnnounceJob::finished(KJob *j)
     error_page = get_job->isErrorPage(); // must be called from slot connected to result()
     if (error_page && !j->error()) {
         QString err_code = get_job->metaData().value(QStringLiteral("responsecode"));
+#if KIO_VERSION >= QT_VERSION_CHECK(5, 96, 0)
+        setError(KIO::ERR_WORKER_DEFINED);
+#else
         setError(KIO::ERR_SLAVE_DEFINED);
+#endif
         setErrorText(QString("HTTP %1").arg(err_code));
     } else {
         setError(j->error());

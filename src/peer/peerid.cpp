@@ -1,22 +1,8 @@
-/***************************************************************************
- *   Copyright (C) 2005 by Joris Guisson                                   *
- *   joris.guisson@gmail.com                                               *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.             *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2005 Joris Guisson <joris.guisson@gmail.com>
+
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 #include "peerid.h"
 
 #include <QMap>
@@ -298,7 +284,7 @@ QString PeerID::identifyClient() const
         name = Map[QStringLiteral("SP")] + ' ' + peer_id.at(2) + '.' + peer_id.at(3) + '.' + peer_id.at(4) + '.' + peer_id.at(5);
     } else if (peer_id.startsWith(QLatin1String("FG"))) {
         name = Map[QStringLiteral("FG")] + ' ' + peer_id.at(2) + '.' + peer_id.at(3) + '.' + peer_id.at(4) + '.' + peer_id.at(5);
-    } else if (peer_id.midRef(2, 2) == QLatin1String("RS")) {
+    } else if (QStringView(peer_id).mid(2, 2) == QLatin1String("RS")) {
         name = Map[QStringLiteral("RS")];
     } else if (peer_id.startsWith(QLatin1String("Q1"))) {
         name = Map[QStringLiteral("Q1")];

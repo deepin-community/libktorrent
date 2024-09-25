@@ -1,3 +1,97 @@
+libktorrent (22.12.3-1) unstable; urgency=medium
+
+  [ Aurélien COUDERC ]
+  * New upstream release (22.12.3).
+  * Update build-deps and deps with the info from cmake.
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Wed, 01 Mar 2023 11:58:04 +0100
+
+libktorrent (22.12.1-1) unstable; urgency=medium
+
+  [ Pino Toscano ]
+  * Explicitly add the pkg-kde-tools build dependency, as dh_sameversiondep
+    is used (not included in the kf5 sequence).
+
+  [ Aurélien COUDERC ]
+  * New upstream release (22.12.1).
+  * Update build-deps and deps with the info from cmake.
+  * Bump Standards-Version to 4.6.2, no change required.
+  * Add Albert Astals Cid’s master key to upstream signing keys.
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Fri, 06 Jan 2023 23:40:36 +0100
+
+libktorrent (22.12.0-3) unstable; urgency=medium
+
+  * Team upload.
+  * Update the symbols files, also from the logs of buildds.
+  * CI: enable again blhc, as it works fine now with blhc 0.13.
+  * Use execute_after_dh_shlibdeps to avoid invoking dh_shlibdeps manually.
+  * Remove inactive Uploaders.
+  * Modernize building:
+    - add the dh-sequence-kf5 build dependency to use the kf5 addon
+      automatically, removing pkg-kde-tools
+    - drop all the manually specified addons and buildsystem for dh
+
+ -- Pino Toscano <pino@debian.org>  Fri, 16 Dec 2022 12:58:09 +0100
+
+libktorrent (22.12.0-2) unstable; urgency=medium
+
+  * Upload with a correctly released changelog.
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Sat, 10 Dec 2022 16:05:01 +0100
+
+libktorrent (22.12.0-1) unstable; urgency=medium
+
+  [ Aurélien COUDERC ]
+  * New upstream release (22.11.90).
+  * New upstream release (22.12.0).
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Sat, 10 Dec 2022 00:13:08 +0100
+
+libktorrent (22.08.3-4) unstable; urgency=medium
+
+  [ Aurélien COUDERC ]
+  * Release to unstable.
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Thu, 24 Nov 2022 22:25:08 +0100
+
+libktorrent (22.08.3-3) experimental; urgency=medium
+
+  [ Aurélien COUDERC ]
+  * Update more symbols from buildds for 22.08.3.
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Wed, 23 Nov 2022 22:05:07 +0100
+
+libktorrent (22.08.3-2) experimental; urgency=medium
+
+  [ Aurélien COUDERC ]
+  * Update symbols from buildds for 22.08.3.
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Wed, 23 Nov 2022 10:39:59 +0100
+
+libktorrent (22.08.3-1) experimental; urgency=medium
+
+  [ Aurélien COUDERC ]
+  * New upstream release (21.12.3).
+  * Bump Standards-Version to 4.6.0, no change required.
+  * Added myself to the uploaders.
+  * ABI bump due to removed symbol:
+    - rename library to libkf5torrent6abi3
+    - update symbols, installed files
+  * Build with hardening=+all build hardening flag.
+  * Drop patch set-pathmax.diff, applied upstream.
+  * Drop dbg package migration rule, not needed anymore.
+  * Rewrite copyright information in DEP5 machine readable format.
+  * Move Salsa URLs from extras group to KDE now that ktorrent is released
+    with KDE Gear.
+  * New upstream release (22.08.3).
+  * Update build-deps and deps with the info from cmake.
+  * Bump Standards-Version to 4.6.1, no change required.
+  * Refresh patch enable_debianabimanager.diff.
+  * Update symbols from build for 22.08.3.
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Sun, 20 Nov 2022 17:53:23 +0100
+
 libktorrent (21.08.0-2) unstable; urgency=medium
 
   * Source-only upload.

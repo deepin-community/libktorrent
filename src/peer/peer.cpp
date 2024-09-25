@@ -1,22 +1,8 @@
-/***************************************************************************
- *   Copyright (C) 2005 by Joris Guisson                                   *
- *   joris.guisson@gmail.com                                               *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.             *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2005 Joris Guisson <joris.guisson@gmail.com>
+
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 #include "peer.h"
 
 #include "packetreader.h"
@@ -46,6 +32,8 @@ using namespace net;
 namespace bt
 {
 static const int MAX_METADATA_SIZE = 100 * 1024 * 1024; // maximum allowed metadata_size (up to 100 MiB)
+static const unsigned MAX_PENDING_UPLOAD_BLOCKS = 512; // allow up to 8 MiB of 16KiB blocks
+static const Uint32 MAX_PENDING_UPLOAD_BYTES = MAX_PENDING_UPLOAD_BLOCKS * (13 + 16384);
 static Uint32 peer_id_counter = 1;
 bool Peer::resolve_hostname = true;
 
@@ -830,6 +818,12 @@ bool Peer::sendChunk(Uint32 index, Uint32 begin, Uint32 len, Chunk *ch)
         Out(SYS_CON | LOG_NOTICE) << "Warning : Illegal piece request" << endl;
         Out(SYS_CON | LOG_NOTICE) << "\tChunk : index " << index << " size = " << ch->getSize() << endl;
         Out(SYS_CON | LOG_NOTICE) << "\tPiece : begin = " << begin << " len = " << len << endl;
+        return false;
+    }
+    if (sock->numPendingPieceUploads() >= MAX_PENDING_UPLOAD_BLOCKS ||
+        sock->numPendingPieceUploadBytes() + 13 + len > MAX_PENDING_UPLOAD_BYTES)
+    {
+        Out(SYS_CON | LOG_NOTICE) << "Warning : rejecting piece request due to limit on pending uploads" << endl;
         return false;
     }
     /*      Out(SYS_CON|LOG_DEBUG) << QString("Uploading %1 %2 %3 %4 %5")

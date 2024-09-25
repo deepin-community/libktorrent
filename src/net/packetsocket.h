@@ -1,22 +1,8 @@
-/***************************************************************************
- *   Copyright (C) 2005 by Joris Guisson                                   *
- *   joris.guisson@gmail.com                                               *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.          *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2005 Joris Guisson <joris.guisson@gmail.com>
+
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 #ifndef NETBUFFEREDSOCKET_H
 #define NETBUFFEREDSOCKET_H
 
@@ -75,6 +61,9 @@ public:
     /// Get the number of pending piece uploads
     Uint32 numPendingPieceUploads() const;
 
+    /// Get the number of pending piece upload bytes (including message headers)
+    Uint32 numPendingPieceUploadBytes() const;
+
 protected:
     /**
      * Preprocess the packet data, before it is sent. Default implementation does nothing.
@@ -91,6 +80,7 @@ protected:
     bt::Packet::Ptr curr_packet;
     Uint32 ctrl_packets_sent;
 
+    Uint32 pending_upload_data_bytes;
     Uint32 uploaded_data_bytes;
 };
 

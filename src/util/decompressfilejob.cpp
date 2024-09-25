@@ -1,28 +1,16 @@
-/***************************************************************************
- *   Copyright (C) 2009 by Joris Guisson                                   *
- *   joris.guisson@gmail.com                                               *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.          *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2009 Joris Guisson <joris.guisson@gmail.com>
+
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "decompressfilejob.h"
-#include <KFilterDev>
+
 #include <QFile>
 #include <QMimeDatabase>
-#include <kcompressiondevice.h>
+
+#include <KCompressionDevice>
+
 #include <util/fileops.h>
 #include <util/log.h>
 
@@ -52,7 +40,7 @@ void DecompressThread::run()
     }
 
     // open output file
-    KCompressionDevice dev(file, KFilterDev::compressionTypeForMimeType(QMimeDatabase().mimeTypeForFile(file).name()));
+    KCompressionDevice dev(file, KCompressionDevice::compressionTypeForMimeType(QMimeDatabase().mimeTypeForFile(file).name()));
     if (!dev.open(QIODevice::ReadOnly)) {
         err = KIO::ERR_CANNOT_OPEN_FOR_READING;
         Out(SYS_GEN | LOG_NOTICE) << "Failed to open " << file << " : " << dev.errorString() << endl;

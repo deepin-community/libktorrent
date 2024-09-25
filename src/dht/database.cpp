@@ -1,22 +1,8 @@
-/***************************************************************************
- *   Copyright (C) 2005 by Joris Guisson                                   *
- *   joris.guisson@gmail.com                                               *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.             *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2005 Joris Guisson <joris.guisson@gmail.com>
+
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 #include "database.h"
 #include <arpa/inet.h>
 #include <torrent/globals.h>
@@ -118,7 +104,22 @@ void Database::expire(bt::TimeStamp now)
         while (dbl->count() > 0 && dbl->first().expired(now)) {
             dbl->pop_front();
         }
-        ++itr;
+        if (dbl->count() == 0) {
+            // PtrMap::erase(PtrMap::iterator) does not auto-delete
+            delete dbl;
+            itr = items.erase(itr);
+        } else {
+            ++itr;
+        }
+    }
+
+    QMap<QByteArray, bt::TimeStamp>::iterator token_itr = tokens.begin();
+    while (token_itr != tokens.end()) {
+        if (now - token_itr.value() >= MAX_ITEM_AGE) {
+            token_itr = tokens.erase(token_itr);
+        } else {
+            ++token_itr;
+        }
     }
 }
 

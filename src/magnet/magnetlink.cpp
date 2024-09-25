@@ -1,24 +1,11 @@
-/***************************************************************************
- *   Copyright (C) 2009 by Joris Guisson                                   *
- *   joris.guisson@gmail.com                                               *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.          *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2009 Joris Guisson <joris.guisson@gmail.com>
+
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "magnetlink.h"
+#include <QRegularExpression>
 #include <QStringList>
 #include <QUrlQuery>
 #include <util/error.h>
@@ -92,14 +79,17 @@ void MagnetLink::parse(const QUrl &url)
     path = QUrlQuery(url).queryItemValue(QStringLiteral("pt"));
     if (path.isEmpty() && url.path() != QLatin1String("/")) {
         // TODO find out why RemoveTrailingSlash does not work
-        path = url.adjusted(QUrl::StripTrailingSlash).path().remove(QRegExp(QLatin1String("^/")));
+        path = url.adjusted(QUrl::StripTrailingSlash).path().remove(QRegularExpression(QLatin1String("^/")));
     }
 
     QString xt = QUrlQuery(url).queryItemValue(QLatin1String("xt"));
     if (xt.isEmpty() || !xt.startsWith(QLatin1String("urn:btih:"))) {
-        QRegExp btihHash(QLatin1String("([^\\.]+).btih"));
-        if (btihHash.indexIn(url.host()) != -1) {
-            QString primaryHash = btihHash.cap(1).split('-')[0];
+        static QRegularExpression btihHash(QLatin1String("([^\\.]+).btih"));
+
+        const QRegularExpressionMatch match = btihHash.match(url.host());
+
+        if (match.hasMatch()) {
+            QString primaryHash = match.captured(1).split('-')[0];
             xt = QLatin1String("urn:btih:") + primaryHash;
         } else {
             Out(SYS_GEN | LOG_NOTICE) << "No hash found in magnet link " << url << endl;
